@@ -16,6 +16,10 @@ class Market
     output
   end
 
-
+  def vendors_that_sell(item)
+    @vendors.find_all do |vendor|
+      vendor.inventory.has_key?(item)
+    end
+  end
 
 end
