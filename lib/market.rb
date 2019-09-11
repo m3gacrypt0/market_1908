@@ -32,5 +32,15 @@ class Market
     output.sort
   end
 
+  def total_inventory
+    output = Hash.new(0)
+    @vendors.each do |vendor|
+      vendor.inventory.each_pair do |item, quantity|
+        output[item] += quantity
+      end
+    end
+    output
+  end
+
 
 end
