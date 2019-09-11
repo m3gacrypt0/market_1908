@@ -8,6 +8,8 @@ class MarketTest < Minitest::Test
   def setup
     @market = Market.new("South Pearl Street Farmers Market")
     @vendor_1 = Vendor.new("Rocky Mountain Fresh")
+    @vendor_2 = Vendor.new("Ba-Nom-a-Nom")
+    @vendor_3 = Vendor.new("Palisade Peach Shack")
   end
 
   def test_it_exists
@@ -19,6 +21,22 @@ class MarketTest < Minitest::Test
     assert_equal [], @market.vendors
   end
 
+  def test_method_add_vendor
+    @market.add_vendor(@vendor_1)
+    assert_equal [@vendor_1], @market.vendors
+    @market.add_vendor(@vendor_2)
+    assert_equal [@vendor_1, @vendor_2], @market.vendors
+    @market.add_vendor(@vendor_3)
+    assert_equal [@vendor_1, @vendor_2, @vendor_3], @market.vendors
+  end
 
+  def test_method_vendor_names
+    @market.add_vendor(@vendor_1)
+    assert_equal ["Rocky Mountain Fresh"], @market.vendor_names
+    @market.add_vendor(@vendor_2)
+    assert_equal ["Rocky Mountain Fresh", "Ba-Nom-a-Nom"], @market.vendor_names
+    @market.add_vendor(@vendor_3)
+    assert_equal ["Rocky Mountain Fresh", "Ba-Nom-a-Nom", "Palisade Peach Shack"], @market.vendor_names
+  end
 
 end
