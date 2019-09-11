@@ -77,4 +77,19 @@ class MarketTest < Minitest::Test
                    "Banana Nice Cream"=>50,
                    "Peach-Raspberry Nice Cream"=>25}), @market.total_inventory
   end
+
+  def test_method_sell
+    @market.add_vendor(@vendor_1)
+    @market.add_vendor(@vendor_2)
+    @market.add_vendor(@vendor_3)
+    refute @market.sell("Peaches", 200)
+    assert_equal 35, @vendor_1.check_stock("Peaches")
+    refute @market.sell("Onions", 1)
+    assert @market.sell("Banana Nice Cream", 5)
+    assert_equal 45, @vendor_2.check_stock("Banana Nice Cream")
+    assert @market.sell("Peaches", 40)
+    assert_equal 0, @vendor_2.check_stock("Peaches")
+    assert_equal 60, @vendor_3.check_stock("Peaches")
+  end
+
 end

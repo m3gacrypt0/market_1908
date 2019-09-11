@@ -42,5 +42,27 @@ class Market
     output
   end
 
+  def sell(item_desired, quantity_desired)
+
+    if total_inventory[item_desired] < quantity_desired
+      return false
+    else
+      debit_quantity = quantity_desired
+      @vendors.each do |vendor|
+        vendor.inventory.each_pair do |item, quantity|
+          if item == item_desired
+            if debit_quantity <= quantity
+              vendor.inventory[item] -= debit_quantity
+            else
+              vendor.inventory[item] = 0
+              debit_quantity -= quantity
+            end
+          end
+        end
+    end
+
+    true
+    end
+  end
 
 end
