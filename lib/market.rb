@@ -22,4 +22,15 @@ class Market
     end
   end
 
+  def sorted_item_list
+    output = []
+    @vendors.each do |vendor|
+      vendor.inventory.each_pair do |item, _|
+        output << item if output.include?(item) == false
+      end
+    end
+    output.sort
+  end
+
+
 end
